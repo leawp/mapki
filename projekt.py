@@ -2,7 +2,7 @@
 file = open('labirynt3.txt')
 mapa = file.readlines()
 mapa = ''.join(mapa)
-import pdb; pdb.set_trace()
+# import pdb; pdb.set_trace()
 visited = []
 def findpath(mapa):
     mapa = mapa.split("\n")
