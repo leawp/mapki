@@ -1,16 +1,8 @@
-mapa = """10 20
-####################
-#      $           #
-#                  #
-#                  #
-#                  #
-#                  #
-#           @      #
-#                  #
-#                  #
-####################
-"""
-
+#!/usr/bin/python
+file = open('labirynt3.txt')
+mapa = file.readlines()
+mapa = ''.join(mapa)
+import pdb; pdb.set_trace()
 visited = []
 def findpath(mapa):
     mapa = mapa.split("\n")
@@ -40,17 +32,21 @@ def findpath(mapa):
 
 def _findpath(mapa, x,y):
     if mapa[y][x] == '$':
-        return
+        return True
     visited.append((x,y))
     if mapa[y][x+1] != '#' and (x+1, y) not in visited:
-        _findpath(mapa, x+1, y)
-    if mapa[y][x-1] != '#' and (x-1, y) not in visited:
-        _findpath(mapa, x-1, y)
-    if mapa[y+1][x] != '#' and (x, y+1) not in visited:
-        _findpath(mapa, x, y+1)
+        if _findpath(mapa, x+1, y):
+            return True
     if mapa[y-1][x] != '#' and (x, y-1) not in visited:
-        _findpath(mapa, x, y-1)
+        if _findpath(mapa, x, y-1):
+            return True
+    if mapa[y][x-1] != '#' and (x-1, y) not in visited:
+        if _findpath(mapa, x-1, y):
+            return True
+    if mapa[y+1][x] != '#' and (x, y+1) not in visited:
+        if _findpath(mapa, x, y+1):
+            return True
+    return False
 
 
 findpath(mapa)
-print mapa
